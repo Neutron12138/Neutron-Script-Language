@@ -4,27 +4,26 @@
 
 int main()
 {
-    nsl::Types::Types types;
-    nsl::MemoryPointer ptr(types.get_type("integer")->get_type_size());
-    nsl::MemoryPointer ptr2(types.get_type("integer")->get_type_size());
+    nsl::Type::TypeManager manager;
 
-    types.get_type("integer")->default_construction(ptr);
-    types.get_type("integer")->default_construction(ptr2);
-    std::cout << nsl::Types::Integer::as_internal_type<nsl::Types::Integer>(ptr) << std::endl;
-    std::cout << nsl::Types::Integer::as_internal_type<nsl::Types::Integer>(ptr2) << std::endl;
+    nsl::MemoryPointer ptr = ntl::make_shared<nsl::Memory>(manager.get_type("integer")->get_type_traits()->get_type_size());
+    nsl::MemoryPointer ptr2 = ntl::make_shared<nsl::Memory>(manager.get_type("integer")->get_type_traits()->get_type_size());
 
-    nsl::Argument arg = nsl::NativeArgument(nsl::Types::Integer::InternalType(666));
+    manager.get_type("integer")->get_type_traits()->default_construction(*ptr);
+    manager.get_type("integer")->get_type_traits()->default_construction(*ptr2);
+    std::cout << nsl::Type::Integer::as_internal_type<nsl::Type::Integer>(*ptr) << std::endl;
+    std::cout << nsl::Type::Integer::as_internal_type<nsl::Type::Integer>(*ptr2) << std::endl;
+
+    nsl::Argument arg = nsl::NativeArgument(nsl::Type::Integer::InternalType(666));
     nsl::ArgumentsArray args = {arg};
-    nsl::Argument arg2 = nsl::MemoryPointer(ptr);
-    types.get_type("integer")->construction(ptr, args);
-    types.get_type("integer")->copy_assignment(ptr2, arg2);
-    std::cout << nsl::Types::Integer::as_internal_type<nsl::Types::Integer>(ptr) << std::endl;
-    std::cout << nsl::Types::Integer::as_internal_type<nsl::Types::Integer>(ptr2) << std::endl;
+    manager.get_type("integer")->get_type_traits()->construction(*ptr, args);
+    nsl::Argument arg2 = nsl::NativeArgument(*ptr);
+    manager.get_type("integer")->get_type_traits()->copy_assignment(*ptr2, arg2);
+    std::cout << nsl::Type::Integer::as_internal_type<nsl::Type::Integer>(*ptr) << std::endl;
+    std::cout << nsl::Type::Integer::as_internal_type<nsl::Type::Integer>(*ptr2) << std::endl;
 
-    types.get_type("integer")->destruction(ptr);
-    types.get_type("integer")->destruction(ptr2);
-    std::cout << (void *)ptr.data() << std::endl;
-    std::cout << (void *)ptr2.data() << std::endl;
+    manager.get_type("integer")->get_type_traits()->destruction(*ptr);
+    manager.get_type("integer")->get_type_traits()->destruction(*ptr2);
 
     return 0;
 }

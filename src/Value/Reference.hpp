@@ -1,0 +1,4 @@
+#ifndef __NEUTRONSL_VALUE_REFERENCE_HPP__
+#define __NEUTRONSL_VALUE_REFERENCE_HPP__
+
+#endif
