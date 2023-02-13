@@ -20,7 +20,7 @@ namespace nsl
         public:
             constexpr Integer() noexcept = default;
             constexpr explicit Integer(const SelfType &from) noexcept = default;
-            ~Integer() override = default;
+            ~Integer() override { std::cout << "~Integer" << std::endl; } // = default;
 
         public:
             constexpr SelfType &operator=(const SelfType &from) noexcept = default;

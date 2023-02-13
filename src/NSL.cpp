@@ -10,4 +10,9 @@
 #include "Type/Type.cpp"
 #include "Type/TypeManager.cpp"
 
+#include "Value/Value.cpp"
+#include "Value/LValue.cpp"
+//#include "Value/Reference.cpp"
+//#include "Value/RValue.cpp"
+
 #endif

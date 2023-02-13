@@ -4,26 +4,43 @@
 
 int main()
 {
-    nsl::Type::TypeManager manager;
+    try
+    {
+        std::cout << "-----start-----" << std::endl;
 
-    nsl::MemoryPointer ptr = ntl::make_shared<nsl::Memory>(manager.get_type("integer")->get_type_traits()->get_type_size());
-    nsl::MemoryPointer ptr2 = ntl::make_shared<nsl::Memory>(manager.get_type("integer")->get_type_traits()->get_type_size());
+        nsl::Type::TypeManager manager;
 
-    manager.get_type("integer")->get_type_traits()->default_construction(*ptr);
-    manager.get_type("integer")->get_type_traits()->default_construction(*ptr2);
-    std::cout << nsl::Type::Integer::as_internal_type<nsl::Type::Integer>(*ptr) << std::endl;
-    std::cout << nsl::Type::Integer::as_internal_type<nsl::Type::Integer>(*ptr2) << std::endl;
+        nsl::Value::LValue var1(manager.get_type("integer"));
+        nsl::Value::LValue var2(manager.get_type("integer"));
 
-    nsl::Argument arg = nsl::NativeArgument(nsl::Type::Integer::InternalType(666));
-    nsl::ArgumentsArray args = {arg};
-    manager.get_type("integer")->get_type_traits()->construction(*ptr, args);
-    nsl::Argument arg2 = nsl::NativeArgument(*ptr);
-    manager.get_type("integer")->get_type_traits()->copy_assignment(*ptr2, arg2);
-    std::cout << nsl::Type::Integer::as_internal_type<nsl::Type::Integer>(*ptr) << std::endl;
-    std::cout << nsl::Type::Integer::as_internal_type<nsl::Type::Integer>(*ptr2) << std::endl;
+        var1.allocate_memory();
+        var2.allocate_memory();
 
-    manager.get_type("integer")->get_type_traits()->destruction(*ptr);
-    manager.get_type("integer")->get_type_traits()->destruction(*ptr2);
+        var1.default_construct_self();
+        var2.default_construct_self();
+        std::cout << "var1:" << var1.as_internal_type<ntl::Int64>() << std::endl;
+        std::cout << "var2:" << var2.as_internal_type<ntl::Int64>() << std::endl;
+
+        nsl::Argument arg = nsl::NativeArgument(nsl::Type::Integer::InternalType(666));
+        nsl::ArgumentsArray args = {arg};
+        var1.construct_self(args);
+        nsl::Argument arg2 = nsl::NativeArgument(*var1.get_memory_pointer());
+        var2.copy_assign_self(arg2);
+        std::cout << "var1:" << var1.as_internal_type<ntl::Int64>() << std::endl;
+        std::cout << "var2:" << var2.as_internal_type<ntl::Int64>() << std::endl;
+
+        var1.destruct_self();
+        var2.destruct_self();
+
+        var1.free_memory();
+        var2.free_memory();
+
+        std::cout << "-----clean up-----" << std::endl;
+    }
+    catch (const ntl::Exception &exception)
+    {
+        std::cout << exception << std::endl;
+    }
 
     return 0;
 }

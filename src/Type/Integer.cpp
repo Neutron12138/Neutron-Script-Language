@@ -56,8 +56,6 @@ namespace nsl
             is_memory_size_legal(memory,
                                  *this,
                                  NTL_STRING("void Integer::destruction(Memory &memory) const"));
-
-            memory.clear();
         }
 
         void
