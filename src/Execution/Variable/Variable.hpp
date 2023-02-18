@@ -26,7 +26,7 @@ namespace nsl
 
         public:
             Variable() = default;
-            Variable(const SelfType &from) = default;
+            explicit Variable(const SelfType &from) = default;
             ~Variable() override = default;
 
         public:

@@ -6,6 +6,9 @@
 #include "NSL.hpp"
 
 #include "Execution/Variable/Variable.cpp"
+#include "Execution/Variable/VariableManager.cpp"
+#include "Execution/Variable/VariableState.cpp"
+#include "Execution/Instruction.cpp"
 #include "Execution/VirtualMachine.cpp"
 
 #endif

@@ -6,6 +6,9 @@
 #include "Info.hpp"
 
 #include "Execution/Variable/Variable.hpp"
+#include "Execution/Variable/VariableManager.hpp"
+#include "Execution/Variable/VariableState.hpp"
+#include "Execution/Instruction.hpp"
 #include "Execution/VirtualMachine.hpp"
 
 #endif
