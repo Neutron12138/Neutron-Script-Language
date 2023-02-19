@@ -20,6 +20,9 @@ namespace nsl
                 /// @brief 没有任何操作
                 None = 0,
 
+                /// @brief 重置缓存
+                ResetTemp,
+
                 /// @brief 加载值
                 LoadVal,
 
@@ -29,11 +32,8 @@ namespace nsl
                 /// @brief 保存变量
                 StoreVar,
 
-                /// @brief 分配内存
-                AllocMemory,
-
-                /// @brief 释放内存
-                FreeMemory,
+                /// @brief 移除变量
+                RemoveVar,
 
                 /// @brief 总数
                 Count,

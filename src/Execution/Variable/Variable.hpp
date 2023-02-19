@@ -21,6 +21,9 @@ namespace nsl
             using ParentType = ntl::Object;
 
         protected:
+            /// @brief 变量类型
+            ntl::String m_type = NTL_STRING("none");
+
             /// @brief 指向变量内存的指针
             MemoryPointer m_memory;
 
@@ -65,6 +68,10 @@ namespace nsl
             template <typename ReturnType>
             const ReturnType &as_native_type(ntl::SizeT offset = 0) const;
 
+            /// @brief 获取类型
+            /// @return 类型
+            const ntl::String &get_type() const;
+
         public:
             /// @brief 分配内存
             /// @param size 内存大小
@@ -72,6 +79,10 @@ namespace nsl
 
             /// @brief 释放内存
             virtual void free_memory();
+
+            /// @brief 设置类型
+            /// @param type 类型
+            virtual void set_type(const ntl::String &type);
         };
 
     } // namespace Execution

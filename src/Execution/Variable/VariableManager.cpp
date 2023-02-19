@@ -54,6 +54,51 @@ namespace nsl
             return m_variables;
         }
 
+        Variable &
+        VariableManager::get_variable(const ntl::String &name)
+        {
+            try
+            {
+                Variable &result = m_variables.at(name);
+                return result;
+            }
+            catch (const std::out_of_range &exception)
+            {
+                throw ntl::OutOfRangeException(
+                    ntl::StringUtils::to_string(
+                        NTL_STRING("Variable \""),
+                        name,
+                        NTL_STRING("\" not found")),
+
+                    NTL_STRING("Variable &VariableManager::get_variable(const ntl::String &name)"));
+            }
+        }
+
+        const Variable &
+        VariableManager::get_variable(const ntl::String &name) const
+        {
+            try
+            {
+                const Variable &result = m_variables.at(name);
+                return result;
+            }
+            catch (const std::out_of_range &exception)
+            {
+                throw ntl::OutOfRangeException(
+                    ntl::StringUtils::to_string(
+                        NTL_STRING("Variable \""),
+                        name,
+                        NTL_STRING("\" not found")),
+                    NTL_STRING("const Variable &VariableManager::get_variable(const ntl::String &name) const"));
+            }
+        }
+
+        bool
+        VariableManager::is_existed(const ntl::String &name) const
+        {
+            return m_variables.find(name) != m_variables.cend();
+        }
+
         void
         VariableManager::add_variable(
             const ntl::String &name,
@@ -71,6 +116,25 @@ namespace nsl
                 std::map<ntl::String, Variable>::value_type(
                     name,
                     variable));
+        }
+
+        void
+        VariableManager::remove_variable(
+            const ntl::String &name)
+        {
+            try
+            {
+                m_variables.erase(name);
+            }
+            catch (const std::out_of_range &exception)
+            {
+                throw ntl::OutOfRangeException(
+                    ntl::StringUtils::to_string(
+                        NTL_STRING("Variable \""),
+                        name,
+                        NTL_STRING("\" not found")),
+                    NTL_STRING("void VariableManager::remove_variable(const ntl::String &name)"));
+            }
         }
 
         bool

@@ -78,6 +78,13 @@ namespace nsl
 
             return *reinterpret_cast<ReturnType *>(get_memory(offset));
         }
+
+        const ntl::String &
+        Variable::get_type() const
+        {
+            return m_type;
+        }
+
         void
         Variable::allocate_memory(
             ntl::SizeT size)
@@ -102,6 +109,13 @@ namespace nsl
                     exception,
                     NTL_STRING("void Variable::free_memory()"));
             }
+        }
+
+        void
+        Variable::set_type(
+            const ntl::String &type)
+        {
+            m_type = type;
         }
 
     } // namespace Execution

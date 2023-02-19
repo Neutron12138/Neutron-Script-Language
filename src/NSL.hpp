@@ -7,7 +7,9 @@
 
 #include "Execution/Variable/Variable.hpp"
 #include "Execution/Variable/VariableManager.hpp"
-#include "Execution/Variable/VariableState.hpp"
+
+#include "Execution/Function/Function.hpp"
+
 #include "Execution/Instruction.hpp"
 #include "Execution/VirtualMachine.hpp"
 

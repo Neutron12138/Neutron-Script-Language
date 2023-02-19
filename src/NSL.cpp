@@ -7,7 +7,9 @@
 
 #include "Execution/Variable/Variable.cpp"
 #include "Execution/Variable/VariableManager.cpp"
-#include "Execution/Variable/VariableState.cpp"
+
+#include "Execution/Function/Function.cpp"
+
 #include "Execution/Instruction.cpp"
 #include "Execution/VirtualMachine.cpp"
 

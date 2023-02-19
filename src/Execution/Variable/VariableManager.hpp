@@ -35,11 +35,30 @@ namespace nsl
             /// @return 所有变量
             const std::map<ntl::String, Variable> &get_variables() const;
 
+            /// @brief 获取变量
+            /// @param name 变量名
+            /// @return 变量
+            Variable &get_variable(const ntl::String &name);
+
+            /// @brief 获取变量
+            /// @param name 变量名
+            /// @return 变量
+            const Variable &get_variable(const ntl::String &name) const;
+
+            /// @brief 获取变量是否已经存在
+            /// @param name 变量名
+            /// @return 变量是否已经存在
+            bool is_existed(const ntl::String &name) const;
+
         public:
             /// @brief 添加一个变量
             /// @param name 变量名
             /// @param variable 变量
             virtual void add_variable(const ntl::String &name, const Variable &variable);
+
+            /// @brief 移除一个变量
+            /// @param name 变量名
+            virtual void remove_variable(const ntl::String &name);
 
             /// @brief 检查变量名是否合法
             /// @param name 变量名
